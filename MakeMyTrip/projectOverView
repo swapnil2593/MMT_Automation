@@ -1,0 +1,14 @@
+Java Main
+    Utility - Consist of all configuration methods (opening browser, SS, xcel operations, system time)
+
+Java Resources
+    config files
+
+Java Test
+    Page objects
+        login_page_objects @AFtermethod....
+        home_page_objects
+    TestCases
+        login_page @TEST
+        home_page
+
