@@ -41,6 +41,9 @@ public class LoginPageObjects extends BaseUtilities{
     @FindBy(xpath = "//div//p[@data-cy='loggedInUser']")
     WebElement myAcc;
     
+    @FindBy(xpath = "//p[@class = 'validity font12 redText appendTop5 makeFlex']")
+    WebElement blankEmailError;
+    
     public void applyClickWait(WebElement element) {
     	WebDriverWait wait = new WebDriverWait(driver, 20);
     	wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -62,18 +65,17 @@ public class LoginPageObjects extends BaseUtilities{
     }
 
     public void setEmailId(String email){
-    	//super.applyClickWait(emailId);
+    	applyVisibleWait(emailId);
         emailId.sendKeys(email);
     }
 
     public void clickContinueButton() throws InterruptedException{
-    	//super.applyClickWait(continueButton);
-    	Thread.sleep(1000);
+    	applyClickWait(continueButton);
         continueButton.click();
     }
 
     public void setPassword(String pass){
-    	applyClickWait(password);
+    	applyVisibleWait(password);
         password.sendKeys(pass);
     }
 
@@ -88,9 +90,17 @@ public class LoginPageObjects extends BaseUtilities{
     }
     
     public String validateMyAcc() {
-    	applyClickWait(myAcc);
+    	applyVisibleWait(myAcc);
     	String str = myAcc.getText();
     	return str;
+    }
+    
+    public String blankEmailerrorValidate()
+    {
+    	applyVisibleWait(blankEmailError);
+    	String blankErrorTxt = blankEmailError.getText();
+    	return blankErrorTxt;
+    	
     }
 
 }
