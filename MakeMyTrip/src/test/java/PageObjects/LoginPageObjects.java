@@ -68,6 +68,13 @@ public class LoginPageObjects extends BaseUtilities{
     	applyVisibleWait(emailId);
         emailId.sendKeys(email);
     }
+    
+    public boolean continueBtnVisible()
+    {
+    	applyClickWait(continueButton);
+    	boolean elem =continueButton.isDisplayed();
+    	return elem;
+    }
 
     public void clickContinueButton() throws InterruptedException{
     	applyClickWait(continueButton);

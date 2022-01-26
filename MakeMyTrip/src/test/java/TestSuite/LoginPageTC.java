@@ -13,7 +13,7 @@ public class LoginPageTC extends BaseUtilities {
     LoginPageObjects lp;
 
     @BeforeSuite
-    public void launchBrowser() {
+    public void launchBrowser() throws Exception {
     	driver = super.setUp("Chrome");
     	lp = new LoginPageObjects(driver);
     	PageFactory.initElements(driver, LoginPageObjects.class);
@@ -22,9 +22,9 @@ public class LoginPageTC extends BaseUtilities {
     @Test(priority=2)
     public void loginTest() throws Throwable{
         lp.clickLoginWith();
-        lp.setEmailId(email);
+        lp.setEmailId(getPropertyFileData().getProperty("email"));
         lp.clickContinueButton();
-        lp.setPassword(pass);
+        lp.setPassword(getPropertyFileData().getProperty("pass"));
         lp.clickLoginButton();
         lp.closePhoneNoWindow();
         String str2 = lp.validateMyAcc();
@@ -33,14 +33,13 @@ public class LoginPageTC extends BaseUtilities {
         System.out.println("login valiudated successfully!!");
     }
     
-    @Test(priority=1)
-    public void blankLogin() throws Exception
+    @Test()
+    public void continueButtonValidation() throws Exception
     {
     	lp.clickLoginWith();
-        lp.setEmailId(" ");
-        lp.clickContinueButton();
-        String val1=lp.blankEmailerrorValidate();
-        System.out.println(val1);
+        super.takeSnapShot();
+        Assert.assertEquals(lp.blankEmailerrorValidate(), true);
+        
     	
     }
 

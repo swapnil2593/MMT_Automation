@@ -25,13 +25,19 @@ import java.util.Properties;
 
 public class BaseUtilities {
     public static WebDriver driver;
-    //Properties prop;
-    public String baseURL = "https://www.makemytrip.com/";
-    public String email = "sopya@yopmail.com";
-    public String pass = "Swapnil@123";
+    public Properties prop;
+    //public String baseURL = "https://www.makemytrip.com/";
+    //public String email = "sopya@yopmail.com";
+    //public String pass = "Swapnil@123";
     
+    public Properties getPropertyFileData() throws IOException {
+        FileInputStream fis = new FileInputStream("./Configurations/Config.properties");
+        prop = new Properties();
+        prop.load(fis);
+        return prop;
+    }
 
-    public WebDriver setUp(String browserName) {
+    public WebDriver setUp(String browserName) throws Exception {
 		
         if (browserName.equalsIgnoreCase("Chrome")) {
             WebDriverManager.chromedriver().setup();
@@ -43,7 +49,7 @@ public class BaseUtilities {
             WebDriverManager.iedriver().setup();
             driver = new InternetExplorerDriver();
         }
-        driver.get(baseURL);
+        driver.get(getPropertyFileData().getProperty("baseURL"));
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
 		return driver;
@@ -64,12 +70,12 @@ public class BaseUtilities {
     	driver.quit();
     }
 
-    /*public Properties getPropertyFileData() throws IOException {
-        FileInputStream fis = new FileInputStream("src/main/resources/Config.properties");
+    /*public void getPropertyFileData() throws IOException {
+        FileInputStream fis = new FileInputStream("./Configurations/Config.properties");
         prop = new Properties();
         prop.load(fis);
-        return prop;
-    }
+        //return prop;
+    }*/
 
     public void takeSnapShot() throws Exception {
 
@@ -80,7 +86,7 @@ public class BaseUtilities {
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
 
         //Move image file to new destination
-        File DestFile = new File("./ScreenShots");
+        File DestFile = new File("./ScreenShots/login.jpg");
 
         //Copy file at destination
         FileUtils.copyFile(SrcFile, DestFile);
@@ -90,5 +96,5 @@ public class BaseUtilities {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         System.out.println(dtf.format(now));
-    }*/
+    }
 }
