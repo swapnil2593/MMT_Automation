@@ -26,9 +26,6 @@ import java.util.Properties;
 public class BaseUtilities {
     public static WebDriver driver;
     public Properties prop;
-    //public String baseURL = "https://www.makemytrip.com/";
-    //public String email = "sopya@yopmail.com";
-    //public String pass = "Swapnil@123";
     
     public Properties getPropertyFileData() throws IOException {
         FileInputStream fis = new FileInputStream("./Configurations/Config.properties");
@@ -55,27 +52,21 @@ public class BaseUtilities {
 		return driver;
     }
     
-    public void applyClickWait(WebElement element) {
-    	WebDriverWait wait = new WebDriverWait(driver, 20);
-    	wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-    
-    public void applyVisibleWait(WebElement element) {
-    	WebDriverWait wait = new WebDriverWait(driver, 20);
-    	wait.until(ExpectedConditions.visibilityOf(element));
-    }
+	/*
+	 * public void applyClickWait(WebElement element) { WebDriverWait wait = new
+	 * WebDriverWait(driver, 20);
+	 * wait.until(ExpectedConditions.elementToBeClickable(element)); }
+	 * 
+	 * public void applyVisibleWait(WebElement element) { WebDriverWait wait = new
+	 * WebDriverWait(driver, 20);
+	 * wait.until(ExpectedConditions.visibilityOf(element)); }
+	 */
     
     @AfterClass
     public void tearDown() {
     	driver.quit();
     }
 
-    /*public void getPropertyFileData() throws IOException {
-        FileInputStream fis = new FileInputStream("./Configurations/Config.properties");
-        prop = new Properties();
-        prop.load(fis);
-        //return prop;
-    }*/
 
     public void takeSnapShot() throws Exception {
 

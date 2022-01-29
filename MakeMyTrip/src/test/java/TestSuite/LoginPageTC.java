@@ -1,34 +1,33 @@
 package TestSuite;
 
-import PageObjects.LoginPageObjects;
-
-import java.io.IOException;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import PageObjects.HomePageObjects;
+import PageObjects.LoginPageObjects;
 import java_main.BaseUtilities;
 
 public class LoginPageTC extends BaseUtilities {
-    WebDriver driver;
-    LoginPageObjects lp;
-
-    @BeforeMethod
-    public void launchBrowser() throws Exception {
-    	driver = super.setUp("Chrome");
+	
+	public WebDriver driver;
+	public LoginPageObjects lp;
+	
+	@BeforeMethod
+	 public void launchBrowser() throws Exception {
+    	driver = super.setUp("Firefox");
     	lp = new LoginPageObjects(driver);
     	PageFactory.initElements(driver, LoginPageObjects.class);
-    }
-    
-    @AfterMethod
-    public void kill()
-    {
-    	super.tearDown();
-    }
+	}
+	
+	@AfterMethod
+	public void quit() {
+		super.tearDown();
+	}
+	
     
     @Test(priority=1)
     public void loginTest() throws Throwable{

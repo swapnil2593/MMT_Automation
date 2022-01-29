@@ -59,6 +59,7 @@ public class LoginPageObjects extends BaseUtilities{
     	WebDriverWait wait = new WebDriverWait(driver, 20);
     	wait.until(ExpectedConditions.visibilityOf(element));
     }
+   
 
     public void clickLoginWith() {
 		applyClickWait(loginWith);
