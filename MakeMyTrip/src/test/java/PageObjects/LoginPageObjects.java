@@ -47,6 +47,9 @@ public class LoginPageObjects extends BaseUtilities{
     @FindBy(xpath = "//button[@data-cy='continueBtn']")
     WebElement hiddenContinueButton;
     
+    @FindBy(xpath = "//span[@data-cy='serverError']")
+    WebElement invalidPassValidation;
+    
     public void applyClickWait(WebElement element) {
     	WebDriverWait wait = new WebDriverWait(driver, 20);
     	wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -110,6 +113,14 @@ public class LoginPageObjects extends BaseUtilities{
     	applyVisibleWait(blankEmailError);
     	String blankErrorTxt = blankEmailError.getText();
     	return blankErrorTxt;
+    	
+    }
+    
+    public String validIDInvalidPass() {
+    	applyVisibleWait(invalidPassValidation);
+    	String invalidPass = invalidPassValidation.getText();
+    	System.out.println(invalidPass);
+    	return invalidPass;
     	
     }
 

@@ -54,16 +54,27 @@ public class LoginPageTC extends BaseUtilities {
     }
     
     @Test
-    public void invalidEmailLogin() throws Exception 
+    public void invalidEmailValidPass() throws Exception 
     {
     	lp.clickLoginWith();
     	lp.setEmailId("test@gm.com");
     	lp.clickContinueButton();
     	lp.setPassword(getPropertyFileData().getProperty("pass"));
     	lp.clickLoginButton();
-    	lp.closePhoneNoWindow();
-    	
-    	
+    	String str = lp.validIDInvalidPass();
+    	Assert.assertEquals(str, "Either Username or Password is incorrect.");
+    }
+    
+    @Test
+    public void validIDInvalidPass() throws InterruptedException, Exception {
+    	lp.clickLoginWith();
+    	lp.setEmailId(getPropertyFileData().getProperty("email"));
+    	lp.clickContinueButton();
+    	lp.setPassword(getPropertyFileData().getProperty("invalidPass"));
+    	lp.clickLoginButton();
+    	Thread.sleep(1000);
+    	String str = lp.validIDInvalidPass();
+    	Assert.assertEquals(str, "Either Username or Password is incorrect.");
     }
 
     /*@Test

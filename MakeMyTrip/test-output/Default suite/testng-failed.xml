@@ -6,7 +6,7 @@
       <class name="TestSuite.LoginPageTC">
         <methods>
           <include name="kill"/>
-          <include name="continueButtonValidation"/>
+          <include name="loginTest"/>
           <include name="tearDown"/>
           <include name="launchBrowser"/>
         </methods>
