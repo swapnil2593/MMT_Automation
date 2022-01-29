@@ -7,7 +7,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import PageObjects.HomePageObjects;
 import PageObjects.LoginPageObjects;
 import java_main.BaseUtilities;
 
@@ -18,7 +17,7 @@ public class LoginPageTC extends BaseUtilities {
 	
 	@BeforeMethod
 	 public void launchBrowser() throws Exception {
-    	driver = super.setUp("Firefox");
+    	driver = super.setUp("chrome");
     	lp = new LoginPageObjects(driver);
     	PageFactory.initElements(driver, LoginPageObjects.class);
 	}
@@ -30,17 +29,12 @@ public class LoginPageTC extends BaseUtilities {
 	
     
     @Test(priority=1)
-    public void loginTest() throws Throwable{
-        lp.clickLoginWith();
-        lp.setEmailId(getPropertyFileData().getProperty("email"));
-        lp.clickContinueButton();
-        lp.setPassword(getPropertyFileData().getProperty("pass"));
-        lp.clickLoginButton();
-        lp.closePhoneNoWindow();
+    public void loginTest() throws Exception{
+        lp.doLogin();
         String str2 = lp.validateMyAcc();
         System.out.println(str2);
         Assert.assertEquals(str2.contains("Hi"), true);
-        System.out.println("login valiudated successfully!!");
+        System.out.println("login validated successfully!!");
     }
     
     @Test(priority = 2)

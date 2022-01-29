@@ -1,6 +1,7 @@
 package TestSuite;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -14,30 +15,27 @@ public class HomePageTC extends BaseUtilities {
 	public WebDriver driver;
 	public HomePageObjects hp;
 	public LoginPageObjects lp;
+	WebElement menuOption;
 	
 	
 	@BeforeClass
 	 public void launchBrowser() throws Exception {
-    	driver = super.setUp("Firefox");
+    	driver = super.setUp("firefox");
     	hp = new HomePageObjects(driver);
     	PageFactory.initElements(driver, HomePageObjects.class);
     	lp = new LoginPageObjects(driver);
     	PageFactory.initElements(driver, LoginPageObjects.class);
-    	lp.clickLoginWith();
-        lp.setEmailId(getPropertyFileData().getProperty("email"));
-        lp.clickContinueButton();
-        lp.setPassword(getPropertyFileData().getProperty("pass"));
-        lp.clickLoginButton();
-        lp.closePhoneNoWindow();
+    	
     	
 	}
 	
-	
 	@Test
-	public void menu() throws Throwable {
-		//lptc.loginTest();
-		
-		hp.flightMenuLink();
+	public void headerMenu() throws Throwable {
+		lp.doLogin();
+		//click on the options by entering 1 to 10
+		menuOption = hp.getHeaderMenueElement(3);
+		menuOption.click();
+		System.out.println(menuOption.getText());
 	}
 
 }

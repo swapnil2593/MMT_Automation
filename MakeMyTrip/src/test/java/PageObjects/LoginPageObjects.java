@@ -1,5 +1,7 @@
 package PageObjects;
 
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -123,6 +125,16 @@ public class LoginPageObjects extends BaseUtilities{
     	System.out.println(invalidPass);
     	return invalidPass;
     	
+    }
+    
+    public void doLogin() throws Exception
+    {
+    	clickLoginWith();
+        setEmailId(getPropertyFileData().getProperty("email"));
+        clickContinueButton();
+        setPassword(getPropertyFileData().getProperty("pass"));
+        clickLoginButton();
+        closePhoneNoWindow();
     }
 
 }

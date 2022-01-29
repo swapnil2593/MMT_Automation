@@ -2,6 +2,7 @@ package PageObjects;
 
 import java_main.BaseUtilities;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePageObjects extends BaseUtilities {
     public WebDriver driver;
+    WebElement flightOption;
     
     public HomePageObjects(WebDriver driver) {
     	this.driver = driver;
@@ -28,14 +30,12 @@ public class HomePageObjects extends BaseUtilities {
     	wait.until(ExpectedConditions.visibilityOf(element));
     }
     
-    @FindBy(xpath= "//ul[@class='makeFlex font12']")
-    WebElement menuHeaders;
     
-    public void flightMenuLink() {
-    	applyVisibleWait(menuHeaders);
-    	String str = menuHeaders.getText();
-    	System.out.println(str);
-    	
+    public WebElement getHeaderMenueElement(int option)
+    {
+        flightOption = driver.findElement(By.xpath("//ul[@class='makeFlex font12']/li["+option+"]"));
+        applyClickWait(flightOption);
+    	return flightOption;
     }
 
     
