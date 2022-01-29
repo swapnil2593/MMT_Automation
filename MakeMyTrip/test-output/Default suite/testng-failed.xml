@@ -6,8 +6,8 @@
       <class name="TestSuite.HomePageTC">
         <methods>
           <include name="launchBrowser"/>
-          <include name="menu"/>
-          <include name="tearDown"/>
+          <include name="headerMenuValidation"/>
+          <include name="close"/>
         </methods>
       </class> <!-- TestSuite.HomePageTC -->
     </classes>

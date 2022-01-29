@@ -2,6 +2,10 @@ package java_main;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -55,7 +59,7 @@ public class BaseUtilities {
 	 * wait.until(ExpectedConditions.visibilityOf(element)); }
 	 */
     
-    @AfterClass
+    
     public void tearDown() {
     	driver.quit();
     }
@@ -76,9 +80,25 @@ public class BaseUtilities {
         FileUtils.copyFile(SrcFile, DestFile);
     }
 
+    public String excelOperations(String sheetName, int rowNo, int cellNo) throws Exception
+    {
+    	File file = new File("../MakeMyTrip/src/test/java/java_main/Validations.xlsx");
+    	FileInputStream fis = new FileInputStream(file);
+    	XSSFWorkbook workbook = new XSSFWorkbook(fis);
+    	Sheet sheet = workbook.getSheet(sheetName);
+    	Row row = sheet.getRow(rowNo);
+    	Cell cell = row.getCell(cellNo);
+    	String value = cell.getStringCellValue();
+    	return value;
+    	
+    	
+    }
+    
     public void getSystemTime(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         System.out.println(dtf.format(now));
     }
+
+	
 }
