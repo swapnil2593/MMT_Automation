@@ -44,6 +44,9 @@ public class LoginPageObjects extends BaseUtilities{
     @FindBy(xpath = "//p[@class = 'validity font12 redText appendTop5 makeFlex']")
     WebElement blankEmailError;
     
+    @FindBy(xpath = "//button[@data-cy='continueBtn']")
+    WebElement hiddenContinueButton;
+    
     public void applyClickWait(WebElement element) {
     	WebDriverWait wait = new WebDriverWait(driver, 20);
     	wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -71,12 +74,12 @@ public class LoginPageObjects extends BaseUtilities{
     
     public boolean continueBtnVisible()
     {
-    	applyClickWait(continueButton);
-    	boolean elem =continueButton.isDisplayed();
+    	applyVisibleWait(hiddenContinueButton);
+    	boolean elem =hiddenContinueButton.isEnabled();
     	return elem;
     }
 
-    public void clickContinueButton() throws InterruptedException{
+    public void clickContinueButton() {
     	applyClickWait(continueButton);
         continueButton.click();
     }

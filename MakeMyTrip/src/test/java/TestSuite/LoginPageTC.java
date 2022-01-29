@@ -1,9 +1,14 @@
 package TestSuite;
 
 import PageObjects.LoginPageObjects;
+
+import java.io.IOException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import java_main.BaseUtilities;
@@ -12,14 +17,20 @@ public class LoginPageTC extends BaseUtilities {
     WebDriver driver;
     LoginPageObjects lp;
 
-    @BeforeSuite
+    @BeforeMethod
     public void launchBrowser() throws Exception {
     	driver = super.setUp("Chrome");
     	lp = new LoginPageObjects(driver);
     	PageFactory.initElements(driver, LoginPageObjects.class);
     }
     
-    @Test(priority=2)
+    @AfterMethod
+    public void kill()
+    {
+    	super.tearDown();
+    }
+    
+    @Test(priority=1)
     public void loginTest() throws Throwable{
         lp.clickLoginWith();
         lp.setEmailId(getPropertyFileData().getProperty("email"));
@@ -33,13 +44,25 @@ public class LoginPageTC extends BaseUtilities {
         System.out.println("login valiudated successfully!!");
     }
     
-    @Test()
+    @Test(priority = 2)
     public void continueButtonValidation() throws Exception
     {
     	lp.clickLoginWith();
         super.takeSnapShot();
-        Assert.assertEquals(lp.blankEmailerrorValidate(), true);
-        
+        Assert.assertEquals(lp.continueBtnVisible(), false);
+        	
+    }
+    
+    @Test
+    public void invalidEmailLogin() throws Exception 
+    {
+    	lp.clickLoginWith();
+    	lp.setEmailId("test@gm.com");
+    	lp.clickContinueButton();
+    	lp.setPassword(getPropertyFileData().getProperty("pass"));
+    	lp.clickLoginButton();
+    	lp.closePhoneNoWindow();
+    	
     	
     }
 
