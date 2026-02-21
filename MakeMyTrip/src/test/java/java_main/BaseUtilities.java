@@ -13,6 +13,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,7 +33,8 @@ public class BaseUtilities {
         prop.load(fis);
         return prop;
     }
-
+    @BeforeSuite
+    @Parameters({"browserName"})
     public WebDriver setUp(String browserName) throws Exception {
 		
         if (browserName.equalsIgnoreCase("Chrome")) {

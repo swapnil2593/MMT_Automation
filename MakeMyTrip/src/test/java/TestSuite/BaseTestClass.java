@@ -16,7 +16,7 @@ public class BaseTestClass extends BaseUtilities {
 	
 	
     public void launchBrowser() throws Exception {
-    	driver = super.setUp("Firefox");
+    	driver = super.setUp("Chrome");
     	lp = new LoginPageObjects(driver);
     	PageFactory.initElements(driver, LoginPageObjects.class);
     } 

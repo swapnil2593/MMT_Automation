@@ -16,18 +16,16 @@ public class LoginPageTC extends BaseUtilities {
 	public LoginPageObjects lp;
 	
 	@BeforeMethod
-	 public void launchBrowser() throws Exception {
-    	driver = super.setUp("chrome");
-    	lp = new LoginPageObjects(driver);
-    	PageFactory.initElements(driver, LoginPageObjects.class);
+	 public void launchBrowser(){
+		try {
+			driver = BaseUtilities.driver;
+			lp = new LoginPageObjects(driver);
+			PageFactory.initElements(driver, LoginPageObjects.class);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
-	
-	@AfterMethod
-	public void quit() {
-		super.tearDown();
-	}
-	
-    
+
     @Test(priority=1)
     public void loginTest() throws Exception{
         lp.doLogin();
